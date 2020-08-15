@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Item } from './models/Item'
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,23 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'todo-list-test';
+  listItems : Item[] = [];
+
+    selectedItem: Item = new Item();
+
+    addItem(){
+      this.selectedItem.id = this.listItems.length + 1;
+      this.listItems.push(this.selectedItem);
+      this.selectedItem = new Item();
+
+    }
+
+    deleteItem(id : number){
+      console.log(id);
+      this.listItems = this.listItems.filter(x => x.id != id);
+    }
+
+    deleteListItems(){
+      this.listItems = [];
+    }
 }
